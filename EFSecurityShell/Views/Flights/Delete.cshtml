@@ -1,0 +1,72 @@
+﻿@model EFSecurityShell.Models.Flight
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Flight</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.OriginatingAirport)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OriginatingAirport)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DestinationAirport)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DestinationAirport)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DepartureDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DepartureDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ArrivalDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ArrivalDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FlightDurationInMinutes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FlightDurationInMinutes)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FlightDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FlightDescription)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
