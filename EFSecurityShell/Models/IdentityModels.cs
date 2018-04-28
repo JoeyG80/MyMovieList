@@ -35,6 +35,6 @@ namespace EFSecurityShell.Models
             return new ApplicationDbContext();
         }
 
-        public System.Data.Entity.DbSet<EFSecurityShell.Models.Flight> Flights { get; set; }
+    
     }
 }

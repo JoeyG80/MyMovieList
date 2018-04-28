@@ -1,0 +1,64 @@
+﻿@model EFSecurityShell.Models.Review
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Review</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Movie.MovieName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Movie.MovieName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReviewName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReviewName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Score)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Score)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReviewContent)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReviewContent)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FavoriteGenre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FavoriteGenre)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

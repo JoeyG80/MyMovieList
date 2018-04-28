@@ -1,0 +1,63 @@
+﻿@model IEnumerable<EFSecurityShell.Models.Review>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Movie.MovieName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReviewName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Score)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReviewContent)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CheckBoxGenre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FavoriteGenre)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Movie.MovieName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReviewName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Score)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReviewContent)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CheckBoxGenre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FavoriteGenre)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+        </td>
+    </tr>
+}
+
+</table>

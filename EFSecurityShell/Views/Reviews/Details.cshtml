@@ -1,0 +1,58 @@
+﻿@model EFSecurityShell.Models.Review
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Review</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Movie.MovieName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Movie.MovieName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReviewName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReviewName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Score)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Score)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReviewContent)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReviewContent)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FavoriteGenre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FavoriteGenre)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

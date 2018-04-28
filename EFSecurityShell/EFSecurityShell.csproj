@@ -46,19 +46,35 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Hasseware.Net.TMDb, Version=1.3.0.0, Culture=neutral, PublicKeyToken=4d204bf90cffca75, processorArchitecture=MSIL">
+      <HintPath>..\packages\Hasseware.TheMovieDB.1.3.0.0\lib\net45\Hasseware.Net.TMDb.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.4\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Http, Version=5.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.4\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.4\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -113,9 +129,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -191,21 +204,49 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
-    <Compile Include="Controllers\FlightsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MoviesController.cs" />
+    <Compile Include="Controllers\ReviewsController.cs" />
     <Compile Include="Controllers\RolesAdminController.cs" />
+    <Compile Include="Controllers\SeensController.cs" />
     <Compile Include="Controllers\UsersAdminController.cs" />
-    <Compile Include="DAL\BookASeatDbContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804280022004_models.cs" />
+    <Compile Include="Migrations\201804280022004_models.Designer.cs">
+      <DependentUpon>201804280022004_models.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804280059273_models1.cs" />
+    <Compile Include="Migrations\201804280059273_models1.Designer.cs">
+      <DependentUpon>201804280059273_models1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804280113393_models2.cs" />
+    <Compile Include="Migrations\201804280113393_models2.Designer.cs">
+      <DependentUpon>201804280113393_models2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804280133170_models3.cs" />
+    <Compile Include="Migrations\201804280133170_models3.Designer.cs">
+      <DependentUpon>201804280133170_models3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804280142545_models31.cs" />
+    <Compile Include="Migrations\201804280142545_models31.Designer.cs">
+      <DependentUpon>201804280142545_models31.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\EditUserViewModel.cs" />
-    <Compile Include="Models\Flight.cs" />
+    <Compile Include="Models\EnumModel.cs" />
+    <Compile Include="Models\Genre.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Movie.cs" />
+    <Compile Include="Models\MyMovieListContext.cs" />
+    <Compile Include="Models\Review.cs" />
     <Compile Include="Models\RoleViewModel.cs" />
+    <Compile Include="Models\Score.cs" />
+    <Compile Include="Models\Seen.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -274,14 +315,25 @@
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\UsersAdmin\Index.cshtml" />
     <Content Include="Views\UsersAdmin\Edit.cshtml" />
-    <Content Include="Views\Flights\Create.cshtml" />
-    <Content Include="Views\Flights\Delete.cshtml" />
-    <Content Include="Views\Flights\Details.cshtml" />
-    <Content Include="Views\Flights\Edit.cshtml" />
-    <Content Include="Views\Flights\Index.cshtml" />
+    <Content Include="Views\Movies\Create.cshtml" />
+    <Content Include="Views\Movies\Delete.cshtml" />
+    <Content Include="Views\Movies\Details.cshtml" />
+    <Content Include="Views\Movies\Edit.cshtml" />
+    <Content Include="Views\Movies\Index.cshtml" />
+    <Content Include="Views\Seens\Create.cshtml" />
+    <Content Include="Views\Seens\Delete.cshtml" />
+    <Content Include="Views\Seens\Details.cshtml" />
+    <Content Include="Views\Seens\Edit.cshtml" />
+    <Content Include="Views\Seens\Index.cshtml" />
+    <Content Include="Views\Reviews\Create.cshtml" />
+    <Content Include="Views\Reviews\Delete.cshtml" />
+    <Content Include="Views\Reviews\Details.cshtml" />
+    <Content Include="Views\Reviews\Edit.cshtml" />
+    <Content Include="Views\Reviews\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="DAL\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -297,6 +349,23 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201804280022004_models.resx">
+      <DependentUpon>201804280022004_models.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804280059273_models1.resx">
+      <DependentUpon>201804280059273_models1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804280113393_models2.resx">
+      <DependentUpon>201804280113393_models2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804280133170_models3.resx">
+      <DependentUpon>201804280133170_models3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804280142545_models31.resx">
+      <DependentUpon>201804280142545_models31.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
