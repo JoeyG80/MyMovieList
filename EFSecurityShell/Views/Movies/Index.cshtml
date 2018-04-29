@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<EFSecurityShell.Models.Movie>
 
+
 @{
     ViewBag.Title = "Index";
 }
@@ -8,6 +9,12 @@
 
 <p>
     @Html.ActionLink("Create New", "Create")
+    @using (Html.BeginForm("Index", "Movies", FormMethod.Get))
+    {
+        @*<label>Filter by category:</label> @Html.EnumDropDownListFor(model => model.Genre, "Select My Type", new { @class = "form-control" })*@
+        <label>Filter by Genre:</label> @Html.DropDownList("Genre", (SelectList)ViewBag.Genre, new { @class = "form-control" })
+        <input type="submit" value="Filter" />
+    }
 </p>
 <table class="table">
     <tr>
@@ -29,29 +36,30 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.MovieName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Director)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DateReleased)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Genre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Summary)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MovieName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Director)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateReleased)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Genre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Summary)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+            </td>
+        </tr>
+    }
 
 </table>
