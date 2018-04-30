@@ -15,11 +15,10 @@ namespace EFSecurityShell.Controllers
         private MyMovieListContext db = new MyMovieListContext();
 
         // GET: Movies
-        public ActionResult Index(string genre,string search)
+        public ActionResult Index(string search)
         {
             var Movies = from s in db.Movies
                            select s;
-            //movies = movies.OrderBy(p => p.Genre).Distinct();
 
             if (!String.IsNullOrEmpty(search))
             {
@@ -28,9 +27,11 @@ namespace EFSecurityShell.Controllers
                 ViewBag.Search = search;
             }
 
-           List<Genre> Genres = Enum.GetValues(typeof(Genre)).Cast<Genre>().ToList();
-            var Sorted = Genres.OrderBy(x => (int)(x.Genre));
-            ViewBag.Genre = new SelectList(Sorted);
+           //List<Genre> Genres = Enum.GetValues(typeof(Genre)).Cast<Genre>().ToList();
+            var Genres = Enum.GetValues(typeof(Genre)).Cast<Genre>().OrderBy(x => x.ToString());
+            Movies = Movies.OrderBy(x => (int)(x.Genre));
+            //ViewBag.Genre = new SelectList(Sorted);
+            //var categories = Movies.OrderBy(p => p.MovieName).Select(p => p.MovieName).Distinct();
             ViewBag.Genre = new SelectList(Genres);
             return View(db.Movies.ToList());
         }
