@@ -11,8 +11,11 @@
     @Html.ActionLink("Create New", "Create")
     @using (Html.BeginForm("Index", "Movies", FormMethod.Get))
     {
-        @*<label>Filter by Genre:</label> @Html.EnumDropDownListFor(model => model.Genre, "Select My Type", new { @class = "form-control" })*@
-        <label>Filter by Genre:</label> @Html.DropDownList("Genre", "All")
+        @*<label>Filter by Genre:</label> @Html.EnumDropDownListFor(model => model.Genre, "Select My Type", new { @class = "form-control" })
+            <label>Filter by Genre:</label> @Html.DropDownList("Genre", "All")*@
+        <label>Filter by Genre:</label> 
+        @Html.DropDownList("Filter",
+              (IEnumerable<SelectListItem>) ViewBag.Genre)
         <input type="submit" value="Filter" />
         <input type="hidden" name="Search" id="Search" value="@ViewBag.Search" />
     }
