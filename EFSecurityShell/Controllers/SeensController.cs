@@ -15,9 +15,40 @@ namespace EFSecurityShell.Controllers
         private MyMovieListContext db = new MyMovieListContext();
 
         // GET: Seens
-        public ActionResult Index()
+        public ActionResult Index(string sortBy)
         {
             var seens = db.Seens.Include(s => s.Movie);
+            ViewBag.SortBy = sortBy;
+
+            switch (sortBy)
+            {
+                case "Name":
+                    seens = seens.OrderBy(p => p.Movie.MovieName);
+                    break;
+                case "Oldest":
+                    seens = seens.OrderBy(p => p.DateSeen);
+                    break;
+                case "Latest":
+                    seens = seens.OrderByDescending(p => p.DateSeen);
+                    break;
+                case "L_Score":
+                    seens = seens.OrderBy(p => p.Score);
+                    break;
+                case "H_Score":
+                    seens = seens.OrderByDescending(p => p.Score);
+                    break;
+                default:
+                    break;
+            }
+            ViewBag.Sorts = new Dictionary<string, string>
+            {
+                {"Movie Name", "Name" },
+                {"Oldest date", "Oldest" },
+                {"Latest date", "Latest" },
+                {"Lowest to Highest Rating", "L_Score" },
+                {"Highest to Lowest Rating", "H_Score" }
+            };
+
             return View(seens.ToList());
         }
 

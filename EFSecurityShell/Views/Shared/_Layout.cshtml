@@ -24,24 +24,25 @@
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                     @if (Request.IsAuthenticated && User.IsInRole("User"))
-                    {
-                         <li>@Html.ActionLink("Movies", "Index", "Movies")</li>
-                        <li>@Html.ActionLink("My Movies", "Index", "Seens")</li>
-                         <li>@Html.ActionLink("Reviews", "Index", "Reviews")</li>
-                    }
+        {
+            <li>@Html.ActionLink("Movies", "Index", "Movies")</li>
+            <li>@Html.ActionLink("My Movies", "Index", "Seens")</li>
+            <li>@Html.ActionLink("Reviews", "Index", "Reviews")</li>
+}
                     @if (Request.IsAuthenticated && User.IsInRole("Admin"))
-                      {
-                         <li>@Html.ActionLink("Administration", "Index", "Admin")</li>
-                       }
+        {
+            <li>@Html.ActionLink("Administration", "Index", "Admin")</li>
+}
 
                 </ul>
-                 @using (Html.BeginForm("Index", "Movies", FormMethod.Get, new { @class = "navbar-form navbar-left" }))
-                {
-                <div class="form-group">
-                    @Html.TextBox("Search", null, new { @class = "form-control", @placeholder = "Search by Movie Title or Director", size = "25" })
-                </div>
-                    <button type="submit" value="search" class="btn btn-default">Submit</button>
-                }
+                @*
+         @using (Html.BeginForm("Index", "Movies", FormMethod.Get, new { @class = "navbar-form navbar-left" }))
+        {
+        <div class="form-group">
+            @Html.TextBox("Search", null, new { @class = "form-control", @placeholder = "Search by Movie Title or Director", size = "25" })
+        </div>
+            <button type="submit" value="search" class="btn btn-default">Submit</button>
+        }*@
                 @Html.Partial("_LoginPartial")
             </div>
         </div>

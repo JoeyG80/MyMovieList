@@ -13,9 +13,15 @@
     {
         @*<label>Filter by Genre:</label> @Html.EnumDropDownListFor(model => model.Genre, "Select My Type", new { @class = "form-control" })
             <label>Filter by Genre:</label> @Html.DropDownList("Genre", "All")*@
-        <label>Filter by Genre:</label> 
+
+        <label>Search:</label>
+        @Html.TextBox("Search", null, new { @placeholder = "by Movie Title or Director", size = "20" })
+        <label>Filter by Genre:</label>
         @Html.DropDownList("Filter",
-              (IEnumerable<SelectListItem>) ViewBag.Genre)
+                                  (IEnumerable<SelectListItem>)ViewBag.Genre, "All")
+
+        <label>Sort By:</label>
+        @Html.DropDownList("SortBy", new SelectList(ViewBag.Sorts, "Value", "Key"), "Default")
         <input type="submit" value="Filter" />
         <input type="hidden" name="Search" id="Search" value="@ViewBag.Search" />
     }

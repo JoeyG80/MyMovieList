@@ -15,7 +15,7 @@ namespace EFSecurityShell.Controllers
         private MyMovieListContext db = new MyMovieListContext();
 
         // GET: Reviews
-        public ActionResult Index()
+        public ActionResult Index(string filter,string sortBy)
         {
             Review model = new Review();
             model.CheckBoxGenre = new List<EnumModel>();
@@ -25,6 +25,39 @@ namespace EFSecurityShell.Controllers
             }
 
             var reviews = db.Reviews.Include(r => r.Movie);
+
+            if (!String.IsNullOrEmpty(filter))
+            {
+                Genre genre = (Genre)Enum.Parse(typeof(Genre), filter);
+                reviews = reviews.Where(p => p.FavoriteGenre == genre);
+                ViewBag.FilterSearch = filter;
+            }
+            var Genres = Enum.GetValues(typeof(Genre)).Cast<Genre>().OrderBy(x => x.ToString());
+            ViewBag.Genre = new SelectList(Genres);
+
+            ViewBag.SortBy = sortBy;
+
+            switch (sortBy)
+            {
+                case "Name":
+                    reviews = reviews.OrderBy(p => p.Movie.MovieName);
+                    break;
+                case "L_Score":
+                    reviews = reviews.OrderBy(p => p.Score);
+                    break;
+                case "H_Score":
+                    reviews = reviews.OrderByDescending(p => p.Score);
+                    break;
+                default:
+                    break;
+            }
+            ViewBag.Sorts = new Dictionary<string, string>
+            {
+                {"Movie Title", "Name" },
+                {"Lowest to Highest Rating", "L_Score" },
+                {"Highest to Lowest Rating", "H_Score" }
+            };
+
             return View(reviews.ToList());
         }
 

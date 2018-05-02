@@ -15,7 +15,7 @@ namespace EFSecurityShell.Controllers
         private MyMovieListContext db = new MyMovieListContext();
 
         // GET: Movies
-        public ActionResult Index(string search, string filter)
+        public ActionResult Index(string search, string filter, string sortBy)
         {
             var Movies = from s in db.Movies
                            select s;
@@ -40,6 +40,26 @@ namespace EFSecurityShell.Controllers
             //ViewBag.Genre = new SelectList(Sorted);
             //var categories = Movies.OrderBy(p => p.MovieName).Select(p => p.MovieName).Distinct();
             ViewBag.Genre = new SelectList(Genres);
+
+            ViewBag.SortBy = sortBy;
+
+            switch (sortBy)
+            {
+                case "Oldest":
+                    Movies = Movies.OrderBy(p => p.DateReleased);
+                    break;
+                case "Latest":
+                    Movies = Movies.OrderByDescending(p => p.DateReleased);
+                    break;
+                default:
+                    break;
+            }
+            ViewBag.Sorts = new Dictionary<string, string>
+            {
+                {"Oldest date", "Oldest" },
+                {"Latest date", "Latest" }
+            };
+
             return View(Movies.ToList());
         }
 

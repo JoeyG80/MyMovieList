@@ -8,7 +8,14 @@
 
 <p>
     @Html.ActionLink("Create New", "Create")
-</p>
+
+    @using (Html.BeginForm("Index", "Seens", FormMethod.Get))
+    {
+        <label>Sort By:</label>
+        @Html.DropDownList("SortBy", new SelectList(ViewBag.Sorts, "Value", "Key"), "Default")
+        <input type="submit" value="Filter" />
+    }
+    </p>
 <table class="table">
     <tr>
         <th>

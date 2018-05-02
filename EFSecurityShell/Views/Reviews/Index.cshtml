@@ -8,6 +8,18 @@
 
 <p>
     @Html.ActionLink("Create New", "Create")
+
+    @using (Html.BeginForm("Index", "Reviews", FormMethod.Get))
+    {
+        <label>Filter by Favorite Genre:</label>
+        @Html.DropDownList("Filter",
+                                       (IEnumerable<SelectListItem>)ViewBag.Genre, "All")
+        <label>Sort By:</label>
+        @Html.DropDownList("SortBy", new SelectList(ViewBag.Sorts, "Value", "Key"), "Default")
+
+        <input type="submit" value="Filter" />
+    }
+
 </p>
 <table class="table">
     <tr>
