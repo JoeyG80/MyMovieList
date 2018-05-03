@@ -31,7 +31,7 @@ namespace EFSecurityShell.Models
         public string ReviewContent { get; set; }
 
         [Display(Name = "Typical Genres you watch / Review")]
-        public IList<EnumModel> CheckBoxGenre { get; set; }
+        public List<EnumModel> CheckBoxGenre { get; set; }
 
         [Display(Name = "Favorite Genre")]
         public Genre FavoriteGenre { get; set; }
