@@ -92,6 +92,17 @@ namespace EFSecurityShell.Controllers
         {
             if (ModelState.IsValid)
             {
+                Review matchingReview = db.Reviews.Where(cm => string.Compare(cm.MovieID.ToString(), review.MovieID.ToString(), true) == 0).FirstOrDefault();
+                if (review == null)
+                {
+                    return HttpNotFound();
+                }
+                if (matchingReview != null)
+                {
+                    ModelState.AddModelError("Movie Name", "Movie name cannot be reviewed twice");
+                    return View(review);
+                }
+
                 db.Reviews.Add(review);
                 db.SaveChanges();
                 return RedirectToAction("Index");

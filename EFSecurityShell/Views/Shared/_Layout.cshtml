@@ -23,16 +23,15 @@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    @if (Request.IsAuthenticated && User.IsInRole("User"))
-        {
-            <li>@Html.ActionLink("Movies", "Index", "Movies")</li>
+         @if (Request.IsAuthenticated && User.IsInRole("User"))
+         {
             <li>@Html.ActionLink("My Movies", "Index", "Seens")</li>
             <li>@Html.ActionLink("Reviews", "Index", "Reviews")</li>
-}
-                    @if (Request.IsAuthenticated && User.IsInRole("Admin"))
-        {
+         }
+          @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+          {
             <li>@Html.ActionLink("Administration", "Index", "Admin")</li>
-}
+          }
 
                 </ul>
                 @*

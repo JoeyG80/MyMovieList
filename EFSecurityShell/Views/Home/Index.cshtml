@@ -4,23 +4,73 @@
 
 <div class="jumbotron">
     <h1>MyMovieList.com</h1>
-    <p class="lead">Movies, TV, Anime, and more!</p>
-    <p>
-        The identity database is seeded with two accounts and two roles to begin with:
-        <ul>
-            <li>Admin Role Login=admin@efshell.com, Password=password</li>
-            <li>User Role Login=user@efshell.com, Password=password</li>
-        </ul>
-    </p>
-    
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+            <li data-target="#myCarousel" data-slide-to="3"></li>
+        </ol>
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner">
+            <div class="item active">
+                <h2 class="carImage">Rampage</h2>
+                <p class="carImage">Rampage the game, now in movie form!</p>
+                <img src="https://image.tmdb.org/t/p/w185_and_h278_bestv2/30oXQKwibh0uANGMs0Sytw3uN22.jpg" alt="Rampage Movie Poster">
+            </div>
+
+            <div class="item">
+                <h2 class="carImage">Avengers: Infinity War</h2>
+                <p class="carImage">The culmincation of every Marvel movie to date!</p>
+                <img src="https://image.tmdb.org/t/p/w185_and_h278_bestv2/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg" alt="Avengers: Infinity War Movie Poster">
+            </div>
+
+            <div class="item">
+                <h2 class="carImage">Ready Player One</h2>
+                <p class="carImage">Ready for the player, one?</p>
+                <img src="https://image.tmdb.org/t/p/w185_and_h278_bestv2/pU1ULUq8D3iRxl1fdX2lZIzdHuI.jpg" alt="Ready Player One Movie Poster">
+            </div>
+            <div class="item">
+                <h2 class="carImage">A Quiet Place</h2>
+                <p class="carImage">A Horror thriller for the ages</p>
+                <img src="https://image.tmdb.org/t/p/w185_and_h278_bestv2/nAU74GmpUk7t5iklEp3bufwDq4n.jpg" alt="A Quiet place Movie Poster">
+            </div>
+        </div>
+
+        <!-- Left and right controls -->
+        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#myCarousel" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+
 </div>
 
 <div class="row">
     <div class="col-md-12">
-        <h2>Lorem ipsum</h2>
-        <p>
-            Lorem ipsum dolor sit amet, volutpat prodesset est in, vix officiis splendide interesset id. His perfecto sensibus cu, duo cu suavitate intellegebat. Ius munere admodum noluisse ne, cu prodesset persecuti definiebas mel. Pro agam elit eu. Animal consequuntur est no, et enim honestatis neglegentur eos.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+
     </div>
 </div>
+<!-- main-container end -->
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+
+        fetch('https://api.myjson.com/bins/ojam2').then(response => {
+            return response.json();
+        }).then(data => {
+            // Work with JSON data here
+            var fullString = JSON.stringify(data)
+            console.log(fullString)
+            document.write(newString)
+        }).catch(err => {
+            console.log("error")
+        });
+    </script>
+}
