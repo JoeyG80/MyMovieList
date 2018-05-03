@@ -69,18 +69,18 @@
 
 <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
-    <script>
+    @Scripts.Render("~/bundles/jqueryui")
 
-            //DatePicker UI Plugin
-            $(function () {
-                $(".datepicker").datepicker({
-                    changeMonth: true,
-                    changeYear: true,
-                    yearRange: "1900:2050",
-                    dateFormat: "dd-mm-yy",
-                });
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('input[type=datetime]').datepicker({
+                dateFormat: "mm/dd/yy",
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "-60:+0"
             });
+        });
     </script>
+
 }
