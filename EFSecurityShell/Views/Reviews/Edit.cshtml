@@ -11,64 +11,81 @@
 {
     @Html.AntiForgeryToken()
     
-    <div class="form-horizontal">
-        <h4>Review</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.ID)
+<div class="form-horizontal">
+    <h4>Review</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.ID)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.MovieID, "MovieID", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("MovieID", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.MovieID, "", new { @class = "text-danger" })
-            </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.MovieID, "MovieID", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("MovieID", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.MovieID, "", new { @class = "text-danger" })
         </div>
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.ReviewName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ReviewName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ReviewName, "", new { @class = "text-danger" })
-            </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.ReviewName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ReviewName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.ReviewName, "", new { @class = "text-danger" })
         </div>
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Score, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EnumDropDownListFor(model => model.Score, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Score, "", new { @class = "text-danger" })
-            </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Score, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EnumDropDownListFor(model => model.Score, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Score, "", new { @class = "text-danger" })
         </div>
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.ReviewContent, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ReviewContent, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ReviewContent, "", new { @class = "text-danger" })
-            </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.ReviewContent, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ReviewContent, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.ReviewContent, "", new { @class = "text-danger" })
         </div>
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.FavoriteGenre, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+    <div class="form-group">
+        @Html.LabelFor(model => model.CheckBoxGenre, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+
+            @for (int i = 0; i < Model.CheckBoxGenre.Count; i++)
+            {
+                 <div>
+
+                    @Html.CheckBoxFor(m => m.CheckBoxGenre[i].IsSelected)
+                    @Html.DisplayFor(m => m.CheckBoxGenre[i].Genre)
+                    @Html.HiddenFor(m => m.CheckBoxGenre[i].Genre)<br />
+                 </div>
+        }
+            @Html.ValidationMessageFor(model => model.CheckBoxGenre, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.FavoriteGenre, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
             @foreach (var genre in Enum.GetValues(typeof(EFSecurityShell.Models.Genre)))
             {
                 var id = TagBuilder.CreateSanitizedId(string.Format("{0}_{1}_{2}", "rdbtn", typeof(EFSecurityShell.Models.Genre), genre));
                 <div>
-                     @Html.RadioButtonFor(s => s.FavoriteGenre, genre, new { id})
-                     @Html.Label(genre.ToString(), new { @for =id})
+                    @Html.RadioButtonFor(s => s.FavoriteGenre, genre, new { id })
+                    @Html.Label(genre.ToString(), new { @for = id })
                 </div>
             }
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
         </div>
     </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save" class="btn btn-default" />
+        </div>
+    </div>
+</div>
 }
 
 <div>

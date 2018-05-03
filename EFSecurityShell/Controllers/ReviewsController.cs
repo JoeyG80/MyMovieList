@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using EFSecurityShell.Models;
@@ -16,13 +17,7 @@ namespace EFSecurityShell.Controllers
 
         // GET: Reviews
         public ActionResult Index(string filter,string sortBy)
-        {
-            Review model = new Review();
-            model.CheckBoxGenre = new List<EnumModel>();
-            foreach (Genre genre in Enum.GetValues(typeof(Genre)))
-            {
-                model.CheckBoxGenre.Add(new EnumModel() { Genre = genre, IsSelected = false });
-            }
+        { 
 
             var reviews = db.Reviews.Include(r => r.Movie);
 
@@ -60,6 +55,42 @@ namespace EFSecurityShell.Controllers
 
             return View(reviews.ToList());
         }
+        /*
+        public ActionResult Index(List<EnumModel> Obj)
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (var item in Obj)
+            {
+
+                if (item.IsSelected)
+                {
+                    //append each checked records into StringBuilder
+                    sb.Append(item.Genre + ",");
+
+                }
+
+
+            }
+            //store location into viewbag
+            ViewBag.Loc = "Your preferred work locations are " + sb.ToString();
+            //return location view to display checked records using viewbag
+            return View();
+        }*/
+
+        [HttpPost]
+        public ActionResult Index(Review items)
+        {
+            items.CheckBoxGenre = new List<EnumModel>();
+            ViewBag.Message = "Selected Items:\\n";
+            foreach (EnumModel item in items.CheckBoxGenre)
+            {
+                if (item.IsSelected == true)
+                {
+                    ViewBag.Message += string.Format("{0}\\n", item.Genre);
+                }
+            }
+            return View();
+        }
 
         // GET: Reviews/Details/5
         public ActionResult Details(int? id)
@@ -80,8 +111,17 @@ namespace EFSecurityShell.Controllers
         public ActionResult Create()
         {
             ViewBag.MovieID = new SelectList(db.Movies, "ID", "MovieName");
-            return View();
+
+            Review model = new Review();
+            model.CheckBoxGenre = new List<EnumModel>();
+            foreach (Genre genre in Enum.GetValues(typeof(Genre)))
+            {
+                model.CheckBoxGenre.Add(new EnumModel() { Genre = genre, IsSelected = false });
+            }
+
+            return View(model);
         }
+
 
         // POST: Reviews/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -114,6 +154,12 @@ namespace EFSecurityShell.Controllers
                 return HttpNotFound();
             }
             ViewBag.MovieID = new SelectList(db.Movies, "ID", "MovieName", review.MovieID);
+
+            review.CheckBoxGenre = new List<EnumModel>();
+            foreach (Genre genre in Enum.GetValues(typeof(Genre)))
+            {
+                review.CheckBoxGenre.Add(new EnumModel() { Genre = genre, IsSelected = false });
+            }
             return View(review);
         }
 

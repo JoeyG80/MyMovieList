@@ -13,7 +13,7 @@
     {
         <label>Filter by Favorite Genre:</label>
         @Html.DropDownList("Filter",
-                                       (IEnumerable<SelectListItem>)ViewBag.Genre, "All")
+                                            (IEnumerable<SelectListItem>)ViewBag.Genre, "All")
         <label>Sort By:</label>
         @Html.DropDownList("SortBy", new SelectList(ViewBag.Sorts, "Value", "Key"), "Default")
 
@@ -44,32 +44,34 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Movie.MovieName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ReviewName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Score)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ReviewContent)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CheckBoxGenre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FavoriteGenre)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Movie.MovieName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReviewName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Score)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReviewContent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CheckBoxGenre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FavoriteGenre)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+            </td>
+        </tr>
+    }
 
 </table>
+
