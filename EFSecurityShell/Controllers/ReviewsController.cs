@@ -15,6 +15,7 @@ namespace EFSecurityShell.Controllers
     {
         private MyMovieListContext db = new MyMovieListContext();
 
+
         // GET: Reviews
         public ActionResult Index(string filter,string sortBy)
         { 
@@ -111,7 +112,6 @@ namespace EFSecurityShell.Controllers
         public ActionResult Create()
         {
             ViewBag.MovieID = new SelectList(db.Movies, "ID", "MovieName");
-
             Review model = new Review();
             model.CheckBoxGenre = new List<EnumModel>();
             foreach (Genre genre in Enum.GetValues(typeof(Genre)))
@@ -119,7 +119,7 @@ namespace EFSecurityShell.Controllers
                 model.CheckBoxGenre.Add(new EnumModel() { Genre = genre, IsSelected = false });
             }
 
-            return View(model);
+            return View();
         }
 
 
@@ -149,6 +149,14 @@ namespace EFSecurityShell.Controllers
             }
 
             ViewBag.MovieID = new SelectList(db.Movies, "ID", "MovieName", review.MovieID);
+
+            review.CheckBoxGenre = new List<EnumModel>();
+            foreach (Genre genre in Enum.GetValues(typeof(Genre)))
+            {
+                review.CheckBoxGenre.Add(new EnumModel() { Genre = genre, IsSelected = false });
+            }
+
+
             return View(review);
         }
 
@@ -166,11 +174,6 @@ namespace EFSecurityShell.Controllers
             }
             ViewBag.MovieID = new SelectList(db.Movies, "ID", "MovieName", review.MovieID);
 
-            review.CheckBoxGenre = new List<EnumModel>();
-            foreach (Genre genre in Enum.GetValues(typeof(Genre)))
-            {
-                review.CheckBoxGenre.Add(new EnumModel() { Genre = genre, IsSelected = false });
-            }
             return View(review);
         }
 
