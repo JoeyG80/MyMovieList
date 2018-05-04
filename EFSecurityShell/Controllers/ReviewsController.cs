@@ -119,7 +119,7 @@ namespace EFSecurityShell.Controllers
                 model.CheckBoxGenre.Add(new EnumModel() { Genre = genre, IsSelected = false });
             }
 
-            return View();
+            return View(model);
         }
 
 
@@ -173,6 +173,12 @@ namespace EFSecurityShell.Controllers
                 return HttpNotFound();
             }
             ViewBag.MovieID = new SelectList(db.Movies, "ID", "MovieName", review.MovieID);
+  
+            review.CheckBoxGenre = new List<EnumModel>();
+            foreach (Genre genre in Enum.GetValues(typeof(Genre)))
+            {
+                review.CheckBoxGenre.Add(new EnumModel() { Genre = genre, IsSelected = false });
+            }
 
             return View(review);
         }
